@@ -10,6 +10,11 @@ This project is a web crawler built with TypeScript and Express, designed to ext
     - Filter entries with more than 5 words in the title, ordered by comments.
     - Filter entries with 5 or fewer words in the title, ordered by points.
 
+## Prerequisites
+
+- Node.js (version 12.x or higher)
+- npm (version 6.x or higher)
+
 ## Installation
 
 1. Clone the repository:
