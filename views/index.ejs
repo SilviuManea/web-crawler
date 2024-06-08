@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker News Crawler</title>
+</head>
+<body>
+    <h1>Hacker News Crawler</h1>
+    <div>
+        <button onclick="fetchEntries()">Fetch Entries</button>
+        <button onclick="filterMore()">Filter More Than 5 Words</button>
+        <button onclick="filterLess()">Filter 5 or Less Words</button>
+    </div>
+    <div id="results"></div>
+
+    <script>
+        async function fetchEntries() {
+            const response = await fetch('/entries');
+            const data = await response.json();
+            displayResults(data);
+        }
+
+        async function filterMore() {
+            const response = await fetch('/filter/more');
+            const data = await response.json();
+            displayResults(data);
+        }
+
+        async function filterLess() {
+            const response = await fetch('/filter/less');
+            const data = await response.json();
+            displayResults(data);
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            data.forEach(entry => {
+                const entryDiv = document.createElement('div');
+                entryDiv.innerHTML = `
+                    <p>Number: ${entry.number}</p>
+                    <p>Title: ${entry.title}</p>
+                    <p>Points: ${entry.points}</p>
+                    <p>Comments: ${entry.comments}</p>
+                    <hr>
+                `;
+                resultsDiv.appendChild(entryDiv);
+            });
+        }
+    </script>
+</body>
+</html>
